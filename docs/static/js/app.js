@@ -34,12 +34,32 @@ function mostrarImagenPokemon(urlPokemon){
 }
 
 //funcion para mostrar los datos del pokemon seleccionado en el popover
-function mostrarDatosPokemon(urlPokemon){
+function mostrarDatosPokemon(urlPokemon,nombrePokemon){
 
     fetch(urlPokemon)
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        
+        let popover_body = document.querySelector(`#${nombrePokemon}`);
+
+        if(popover_body!==null){
+
+            let tipo = "";
+            let habilidades = "";
+
+            data.types.forEach(item => tipo += item.type.name+" / ");
+
+            data.abilities.forEach(habilidad => habilidades += habilidad.ability.name+", ");
+
+            let datos = "tipo: "+tipo.slice(0,-2)+"\n"+
+                "altura: "+data.height+"\n"+
+                "peso: "+data.weight+"\n"+
+                "habilidades: "+habilidades.slice(0,-2)
+
+            popover_body.setAttribute('data-content',`${datos}`);
+
+        }
+
     })
     .catch(error => console.error(error))
 
@@ -80,8 +100,8 @@ document.getElementById('buscador').addEventListener('keyup', ()=> {
     
             html += `
             <div class="col-md-4">
-                <div class="card m-2 text-center shadow shadow-sm" id="popover-info" tabindex="0"
-                data-toggle="popover" data-trigger="hover" title="${pokemon.name}" data-content="${mostrarDatosPokemon(pokemon.url)}">
+                <div class="card m-2 text-center shadow shadow-sm" id="${pokemon.name}" tabindex="0"
+                data-toggle="popover" data-trigger="hover" title="${pokemon.name}" data-content="${mostrarDatosPokemon(pokemon.url,pokemon.name)}">
                     <div class="card-header">
                         <h6>${pokemon.name}</h6>
                     </div>
