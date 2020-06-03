@@ -6,6 +6,7 @@ $(function () {
 
 let listaPokemon = new Array();
 
+//funcion que carga la lista de los pokemones
 function cargarDatos(){
 
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
@@ -20,6 +21,8 @@ function cargarDatos(){
 
 cargarDatos();
 
+
+//muestra la imagen de pokemon desde enlace externo
 function mostrarImagenPokemon(urlPokemon){
     
     
@@ -30,6 +33,7 @@ function mostrarImagenPokemon(urlPokemon){
     return imagen;
 }
 
+//funcion para mostrar los datos del pokemon seleccionado en el popover
 function mostrarDatosPokemon(urlPokemon){
 
     fetch(urlPokemon)
@@ -41,7 +45,7 @@ function mostrarDatosPokemon(urlPokemon){
 
 }
 
-
+//evento informacion de pokemon al seleccionar el card
 function infoCard(){
 
     //evento card de pokemon sobre
@@ -60,7 +64,7 @@ function infoCard(){
 
 }
 
-
+//evento de keyup para buscar pokemones
 document.getElementById('buscador').addEventListener('keyup', ()=> {
 
     let buscador = document.getElementById('buscador').value.toLowerCase();
