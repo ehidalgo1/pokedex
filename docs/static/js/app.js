@@ -63,7 +63,7 @@ function infoCard(){
 
 document.getElementById('buscador').addEventListener('keyup', ()=> {
 
-    let buscador = document.getElementById('buscador').value;
+    let buscador = document.getElementById('buscador').value.toLowerCase();
 
     let resultado = listaPokemon.filter((item,i) => item.name.indexOf(buscador) !== -1);
 
