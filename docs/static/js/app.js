@@ -6,7 +6,7 @@ $(function () {
 
 let listaPokemon = new Array();
 
-//funcion que carga la lista de los pokemones
+//funcion que carga la lista de los pokemones y llena inicialmente los card
 function cargarDatos(){
 
     fetch('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0')
@@ -14,12 +14,42 @@ function cargarDatos(){
     .then(array => {
     
         listaPokemon = array.results;
+
+        let html = "";
+
+        listaPokemon.forEach(pokemon => {
+    
+            html += `
+            <div class="col-md-4">
+                <div class="card m-2 text-center shadow shadow-sm" id="${pokemon.name}" tabindex="0"
+                data-toggle="popover" data-trigger="hover" title="${pokemon.name}" data-content="${mostrarDatosPokemon(pokemon.url,pokemon.name)}">
+                    <div class="card-header">
+                        <h6>${pokemon.name}</h6>
+                    </div>
+                    <div class="card-body">
+                        <img src=${mostrarImagenPokemon(pokemon.url)} width="150" height="150">
+                        </div>
+                </div>
+            </div>
+            `;
+        });
+
+
+    let contenedor = document.querySelector('#contenedor');
+    let mostrando = document.getElementById('mostrando');
+    mostrando.innerHTML = `<p>mostrando <b>${listaPokemon.length} / ${listaPokemon.length}</b></p>`;
+
+    contenedor.innerHTML = html;
+
+    infoCard();
+
     })
     .catch(error => console.warn(error))
 
+
+
 }
 
-cargarDatos();
 
 
 //muestra la imagen de pokemon desde enlace externo
@@ -132,6 +162,7 @@ document.getElementById('buscador').addEventListener('keyup', ()=> {
 });
 
 
+cargarDatos();
 
 
 
