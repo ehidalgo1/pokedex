@@ -1,6 +1,8 @@
 
 $(function () {
-    $('[data-toggle="popover"]').popover()
+    $('[data-toggle="popover"]').popover({
+        html: true
+    })
 });
 
 
@@ -81,12 +83,13 @@ function mostrarDatosPokemon(urlPokemon,nombrePokemon){
 
             data.abilities.forEach(habilidad => habilidades += habilidad.ability.name+", ");
 
-            let datos = "tipo: "+tipo.slice(0,-2)+"\n"+
-                "altura: "+data.height+"\n"+
-                "peso: "+data.weight+"\n"+
-                "habilidades: "+habilidades.slice(0,-2)
+            let datos = `tipo: ${tipo.slice(0, -2)} 
+                        altura: ${data.height} 
+                        peso: ${data.weight} 
+                        habilidades: ${habilidades.slice(0, -2)}`
 
             popover_body.setAttribute('data-content',`${datos}`);
+            popover_body.setAttribute('html',true);
 
         }
 
