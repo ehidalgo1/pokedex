@@ -1,13 +1,13 @@
 # pokedex
 Un proyecto realizado con nostalgia en mis tiempos libres
 
-###Has la prueba
+### Pruebalo
 >https://ehidalgo1.github.io/pokedex/
 
-###Recursos
--HTML
--CSS
--Javascript (vanilla)
+### Recursos
+- HTML
+- CSS
+- Javascript (vanilla)
 
-###Frameworks
--Bootstrap
+### Librerias
+- Bootstrap
