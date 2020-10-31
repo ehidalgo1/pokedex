@@ -161,7 +161,7 @@ document.getElementById('buscador').addEventListener('keyup', ()=> {
 
 });
 
-
+//llamada al método inicial cargarDatos que carga los poquemones
 cargarDatos();
 
 
