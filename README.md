@@ -1,4 +1,4 @@
-# pokedex
+# pokedex v2.0.0
 Un proyecto realizado con nostalgia en mis tiempos libres
 
 ### Pruebalo
