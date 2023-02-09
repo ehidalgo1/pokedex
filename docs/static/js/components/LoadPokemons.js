@@ -2,21 +2,19 @@ import env from '../../../env.json' assert { type: "json" };
 
 let listaPokemon = new Array();
 
-export default function cargarDatos() {
+export default function cargarDatos(generacion) {
 
-    fetch(`${env.API_BASE_URL}?limit=151&offset=0`)
+    fetch(`${env.API_BASE_URL}/${generacion}`)
     .then(res => res.json())
-    .then(array => {
-
-        listaPokemon = array.results;
+    .then(result => {
 
         let html = "";
         
-        listaPokemon.forEach(pokemon => {
+        result.pokemon_species.forEach(pokemon => {
             html += `
             <div class="col-md-4">
                 <div class="card m-2 text-center shadow shadow-sm" id="${pokemon.name}" tabindex="0"
-                data-toggle="popover" data-trigger="hover" title="${pokemon.name}" data-content="${mostrarDatosPokemon(pokemon.url,pokemon.name)}">
+                data-toggle="popover" data-trigger="hover" title="${pokemon.name}" data-content="${mostrarDatosPokemon(pokemon.url, pokemon.name)}">
                     <div class="card-header">
                         <h6>${pokemon.name}</h6>
                     </div>
@@ -88,7 +86,7 @@ const mostrarImagenPokemon = (urlPokemon) => {
 }
 
 //funcion para mostrar los datos del pokemon seleccionado en el popover
-const mostrarDatosPokemon = (urlPokemon,nombrePokemon) => {
+const mostrarDatosPokemon = (urlPokemon, nombrePokemon) => {
 
     fetch(urlPokemon)
     .then(res => res.json())
@@ -98,15 +96,17 @@ const mostrarDatosPokemon = (urlPokemon,nombrePokemon) => {
 
         if(popover_body!==null){
 
-            let tipo = "";
-            let habilidades = "";
-            data.types.forEach(item => tipo += item.type.name+" / ");
-            data.abilities.forEach(habilidad => habilidades += habilidad.ability.name+", ");
+            let descripcion = "";
+            descripcion = data.flavor_text_entries.filter(entries => entries.language.name === "es");
+            let uniqueArray = [];
+            descripcion.forEach( t => {
+                if (!uniqueArray.includes(t.flavor_text)){
+                    uniqueArray.push(t.flavor_text);
+                }
+            });
+            
 
-            let datos = `tipo: ${tipo.slice(0, -2)} 
-                        altura: ${data.height} 
-                        peso: ${data.weight} 
-                        habilidades: ${habilidades.slice(0, -2)}`
+            let datos = `descripcion: ${uniqueArray} `
 
             popover_body.setAttribute('data-content',`${datos}`);
             popover_body.setAttribute('html',true);

@@ -7,9 +7,16 @@ $(function () {
     })
 });
 
+if(document.readyState) {
+    cargarDatos(1);
+}
 
 
-cargarDatos();
+document.getElementById("generation").addEventListener("change", (e) => {
+    let gen = document.getElementById("generation");
+    cargarDatos(gen.value);
+});
+
 
 
 
