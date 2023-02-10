@@ -96,17 +96,16 @@ const mostrarDatosPokemon = (urlPokemon, nombrePokemon) => {
 
         if(popover_body!==null){
 
-            let descripcion = "";
-            descripcion = data.flavor_text_entries.filter(entries => entries.language.name === "es");
-            let uniqueArray = [];
-            descripcion.forEach( t => {
-                if (!uniqueArray.includes(t.flavor_text)){
-                    uniqueArray.push(t.flavor_text);
+            let descriptions = data.flavor_text_entries.filter(entries => entries.language.name === "es");
+            let text = "";
+            descriptions.forEach( t => {
+                if (!text.includes(t.flavor_text)){
+                    text = text+t.flavor_text+' ';
                 }
             });
             
 
-            let datos = `descripcion: ${uniqueArray} `
+            let datos = `Descriptions: ${text}`;
 
             popover_body.setAttribute('data-content',`${datos}`);
             popover_body.setAttribute('html',true);
