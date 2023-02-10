@@ -4,6 +4,8 @@ let listaPokemon = new Array();
 
 export default function cargarDatos(generacion) {
 
+    listaPokemon = [];
+
     fetch(`${env.API_BASE_URL}/${generacion}`)
     .then(res => res.json())
     .then(result => {
