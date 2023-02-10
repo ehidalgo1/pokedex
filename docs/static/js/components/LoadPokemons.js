@@ -24,6 +24,8 @@ export default function cargarDatos(generacion) {
                 </div>
             </div>
             `;
+
+            listaPokemon.push(pokemon);
         });
 
     let contenedor = document.querySelector('#contenedor');
@@ -40,7 +42,7 @@ export default function cargarDatos(generacion) {
 document.getElementById('buscador').addEventListener('keyup', ()=> {
 
     let buscador = document.getElementById('buscador').value.toLowerCase();
-    let resultado = listaPokemon.filter((item,i) => item.name.indexOf(buscador) !== -1);
+    let resultado = listaPokemon.filter((poke) => poke.name.indexOf(buscador) !== -1);
     let html = "";
 
     //consulto si hay elementos en el arraylist, sino muesto un mensaje informando no encontrado
